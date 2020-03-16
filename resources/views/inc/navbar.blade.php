@@ -1,25 +1,16 @@
 <script>
-    // $(document).ready(function() {
-    //     $("li a").click(function() {
-    //         $("li a").removeClass('current');
-    //         $(this).addClass('current');
-    //         // let text = $(this).find('a').text();
-    //         // localStorage.setItem('selectedTab', 'current');
-    //     });
-    // });
     $(document).ready(function() {
-				$("li a").click(function() {
-					$("li a").removeClass('current');
-					$(this).addClass('current');
-                    console.log("CHANGE");
-				});
-		});
-    // let selectedTab = localStorage.getItem('selectedTab');
-    // $('.icon').find('a').each(function() {
-    //  if($(this).text() === selectedTab) {
-    //  $(this).parent().addClass('current');
-    //  }
-    // });
+        $("li a").on('click', function(e) {
+            localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+        var activeTab = localStorage.getItem('activeTab');
+        if(activeTab){
+            $('li a[href="' + activeTab + '"]').addClass('current');
+        }
+        $("#myDropdown a").on('click', function(e) {
+            localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+	});
     function showDropdown() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
