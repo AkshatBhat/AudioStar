@@ -1,14 +1,18 @@
 <script>
     $(document).ready(function() {
+        'use strict';
+
         $("li a").on('click', function(e) {
-            localStorage.setItem('activeTab', $(e.target).attr('href'));
+            sessionStorage.setItem('activeTab', $(e.target).attr('href'));
         });
-        var activeTab = localStorage.getItem('activeTab');
+        var activeTab = sessionStorage.getItem('activeTab');
         if(activeTab){
             $('li a[href="' + activeTab + '"]').addClass('current');
+        } else {
+            $('li a[href="/"]').addClass('current');
         }
         $("#myDropdown a").on('click', function(e) {
-            localStorage.setItem('activeTab', $(e.target).attr('href'));
+            sessionStorage.setItem('activeTab', $(e.target).attr('href'));
         });
 	});
     function showDropdown() {
