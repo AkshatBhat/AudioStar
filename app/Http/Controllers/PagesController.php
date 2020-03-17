@@ -10,7 +10,7 @@ class PagesController extends Controller
     {
         $title = 'AudioStar';
         // return view('pages.index',compact('title'));
-        return view('pages.index')->with('title',$title); //with('the name u want in view to be put as $name in view',$varname)
+        return view('pages.index'); //with('the name u want in view to be put as $name in view',$varname)
     }
     public function about()
     {

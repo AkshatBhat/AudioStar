@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('pages.about');
 // });
 
-Route::get('/', 'PagesController@index');
+Route::get('/', 'PostsController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 Route::get('/welcome', 'PagesController@welcome');
@@ -25,6 +25,7 @@ Route::get('/contact', 'PagesController@contact');
 Route::get('/allmusic', 'PagesController@allmusic');
 Route::get('/myplaylists', 'PagesController@myplaylists');
 Route::get('/likedsongs', 'PagesController@likedsongs');
+Route::get('/songs/read-data','PostsController@readSongsData');
 
-
+Route::resource('posts','PostsController');
 
