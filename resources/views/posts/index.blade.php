@@ -125,6 +125,7 @@
 					$('#footer').removeClass('hidden');
 					return 500;
 				});
+				break;
 			}
 		}			
 	});
