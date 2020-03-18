@@ -21,7 +21,7 @@
 							@php
 								$i++;	
 							@endphp
-							<div class="component">
+							<div class="component" id="{{$es->id}}">
 								<a href="#{{$es->id}}"><img src="{{$es->song_image_url}}" alt="{{$es->title}} image" height = 200 width = 200></a><br>
 								<div style="padding: 5px;"></div>
 								<label class="songname" for="{{$es->id}}">
@@ -41,7 +41,7 @@
 							@php
 								$i++;	
 							@endphp
-							<div class="component">
+							<div class="component" id="{{$hs->id}}">
 								<a href="#{{$hs->id}}"><img src="{{$hs->song_image_url}}" alt="{{$hs->title}} image" height = 200 width = 200></a><br>
 								<div style="padding: 5px;"></div>
 								<label class="songname" for="{{$hs->id}}">
@@ -61,7 +61,7 @@
 							@php
 								$i++;	
 							@endphp
-							<div class="component">
+							<div class="component" id="{{$post->id}}">
 								<a href="#{{$post->id}}"><img src="{{$post->song_image_url}}" alt="{{$post->title}} image" height = 200 width = 200></a><br>
 								<div style="padding: 5px;"></div>
 								<label class="songname" for="{{$post->id}}">
@@ -69,7 +69,7 @@
 								</label>
 							</div>
 							@php
-								if ($i==5) {
+								if ($i==6) {
 								break;
 								}
 							@endphp
@@ -101,16 +101,43 @@
 	// 		console.log(data);
 	// 	})
 	// });
-	var comps = document.querySelectorAll('.component');
-	comps.forEach(function(comp) {
-		comp.addEventListener('click',compIndex);
-	})
 
-	function compIndex()
-	{
-		$.get("{{URL::to('/songs/read-data')}}",function (data) {
-			console.log(data);
-	})}
+	$(".component").on('click', function() {
+		let compId = parseInt($(this).attr("id"));
+		console.log(compId);
+		let songs = ({!! json_encode($posts->toArray(), JSON_HEX_TAG) !!});
+		console.log(songs);
+		for(let i=0;i<songs.length;i++)
+		{
+			let obj = songs[i];
+			if(obj.id===compId)
+			{
+				console.log(obj.song_source_url);
+				let audio = document.getElementById("audio");
+				audio.pause();
+				audio.src = obj.song_source_url;	
+				audio.play();	
+				$('#footer').fadeOut(function() {
+					$('#footer').addClass('hidden');
+					return 500;
+				});
+				$('#footer').fadeIn(function() {
+					$('#footer').removeClass('hidden');
+					return 500;
+				});
+			}
+		}			
+	});
+	// var comps = document.querySelectorAll('.component');
+	// comps.forEach(function(comp) {
+	// 	comp.addEventListener('click',compIndex);
+	// }) 
+
+	// function compIndex()
+	// {
+	// 	$.get("{{URL::to('/songs/read-data')}}",function (data) {
+	// 		console.log(data);	
+	// })}
 	// function compIndex(event)
 	// {
 	// 	console.log(Array.from(comps).indexOf(event.target));

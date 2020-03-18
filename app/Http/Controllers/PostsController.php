@@ -16,7 +16,7 @@ class PostsController extends Controller
     {
         $posts = Post::orderBy('id','desc')->get();
         $englishsongs = Post::where('english','1')->orderBy('id','desc')->get();
-        $hindisongs = Post::where('hindi','1')->orderBy('id','desc')->get();
+        $hindisongs = Post::where('hindi','1')->orderBy('id','desc')->get(); 
         $captions = ['Newest Releases', 'English Songs', 'Hindi Songs'];
         // return view('pages.index',compact('title'));
         return view('posts.index')->with(['captions'=>$captions,

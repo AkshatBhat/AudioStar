@@ -14,7 +14,7 @@
     </head>
     <body>
         @include('inc.navbar')
-        <div class="container">
+        <div>
             @yield('content')
         </div>
         @yield('script')
