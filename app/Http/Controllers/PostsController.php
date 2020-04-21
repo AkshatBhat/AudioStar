@@ -19,7 +19,7 @@ class PostsController extends Controller
         $hindisongs = Post::where('hindi','1')->orderBy('id','desc')->get(); 
         $captions = ['Newest Releases', 'English Songs', 'Hindi Songs'];
         // return view('pages.index',compact('title'));
-        return view('posts.index')->with(['captions'=>$captions,
+        return view('posts.index')->with(['captions'=>$captions, 
             'posts'=>$posts,
             'englishsongs'=>$englishsongs,
             'hindisongs'=>$hindisongs]); //with('the name u want in view to be put as $name in view',$varname)
@@ -30,6 +30,7 @@ class PostsController extends Controller
         $songs = Post::orderBy('id','desc')->get();
         return response($songs);
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class PagesController extends Controller
 {
@@ -37,8 +38,8 @@ class PagesController extends Controller
     }
     public function allmusic()
     {
-        $title = 'All Music';
-        return view('pages.allmusic')->with('title',$title);
+        $posts = Post::orderBy('id','desc')->get();
+        return view('pages.allmusic')->with('posts',$posts);
     }
     public function myplaylists()
     {

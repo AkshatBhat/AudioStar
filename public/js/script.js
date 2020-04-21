@@ -1,34 +1,22 @@
-$(document).ready(function() {
-    'use strict';
+$(document).ready(function() { // Wait till the page is loaded
+    $('li a[href="/"]').addClass('current');
+    var activeTab = '/';
+    const homeTabContent = $(".wrapper").html();
+    window.history.pushState({ "html": homeTabContent, "pageTitle": "Audiostar" }, "", activeTab);
 
-    $("li a").on('click', function(e) {
-        sessionStorage.setItem('activeTab', $(e.target).attr('href'));
-    });
-    var activeTab = sessionStorage.getItem('activeTab');
-    if (activeTab) {
+    $('.ulist li a, .dropdown-content a').on('click', function(e) {
+        event.preventDefault();
+        $('li a[href="' + activeTab + '"]').removeClass('current');
+        activeTab = $(e.target).attr('href');
         $('li a[href="' + activeTab + '"]').addClass('current');
-    } else {
-        $('li a[href="/"]').addClass('current');
-    }
-    $("#myDropdown a").on('click', function(e) {
-        sessionStorage.setItem('activeTab', $(e.target).attr('href'));
+        if (activeTab !== '/')
+            $(".wrapper").load(activeTab);
+        else
+            document.getElementById("wrapper").innerHTML = homeTabContent;
+        window.history.pushState({ "html": document.getElementById("wrapper").innerHTML, "pageTitle": "Audiostar" }, "", activeTab);
+        bindComponentClick();
     });
 
-    // var audio = document.getElementById("audio");
-    // $(".component").on('click', function() {
-    //     //console.log("component activated");
-    //     $('#footer').fadeOut(function() {
-    //         $('#footer').addClass('hidden');
-    //         return 500;
-    //     });
-    //     $('#footer').fadeIn(function() {
-    //         $('#footer').removeClass('hidden');
-    //         return 500;
-    //     });
-    //     audio.pause();
-    //     // audio.currentTime = 0;
-    //     audio.play();
-    // });
 });
 
 function showDropdown() {
@@ -46,3 +34,9 @@ window.onclick = function(event) {
         }
     }
 }
+window.onpopstate = function(e) {
+    if (e.state) {
+        document.getElementById("content").innerHTML = e.state.html;
+        document.title = e.state.pageTitle;
+    }
+};
