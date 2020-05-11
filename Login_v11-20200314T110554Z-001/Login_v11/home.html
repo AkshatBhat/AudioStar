@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>AudioStar</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<ul>
+				<li><img src="logo.png" alt="main logo" height="62"></li>
+				<li><a href="#home">Home</a></li>
+				<li><a href="#allmusic">All Music</a></li>
+				<li><a href="#myplaylist">My Playlist</a></li>
+				<li><a href="#likedsongs">Liked Songs</a></li>
+				<i onclick="showDropdown()" style="float: right; padding-top: 18px; padding-right: 20px; color: #fff;" class="fa fa-ellipsis-v" id="menubutton"></i>
+				<div class="container h-100">
+					<div class="d-flex justify-content-center h-100">
+						<div class="searchbar">
+							<input class="search_input" type="text" name="" placeholder="Search...">
+							<a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+						</div>
+					</div>
+				</div>
+			</ul>
+			<div id="myDropdown" class="dropdown-content">
+				<a href="#home">Home</a>
+				<a href="#about">About</a>
+				<a href="#contact">Contact</a>
+			</div>
+			<div style="padding: 10px;"></div>
+			<div class="non-sticky">
+				<h4>Trending Songs</h4>
+				<div class="side-to-side">
+					<div class="component">
+						<a href="#song1"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song1">Song 1</label>
+					</div>
+					<div class="component">
+						<a href="#song2"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song2">Song 2</label>
+					</div>
+					<div class="component">
+						<a href="#song3"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song3">Song 3</label>
+					</div>
+					<div class="component">
+						<a href="#song4"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song4">Song 4</label>
+					</div>
+					<div class="component">
+						<a href="#song5"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song5">Song 5</label>
+					</div>
+				</div>
+				<br>
+				<h4>Mostly Watched</h4>
+				<div class="side-to-side">
+					<div class="component">
+						<a href="#song1"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song1">Song 1</label>
+					</div>
+					<div class="component">
+						<a href="#song2"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song2">Song 2</label>
+					</div>
+					<div class="component">
+						<a href="#song3"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song3">Song 3</label>
+					</div>
+					<div class="component">
+						<a href="#song4"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song4">Song 4</label>
+					</div>
+					<div class="component">
+						<a href="#song5"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song5">Song 5</label>
+					</div>
+				</div>
+				<br>
+				<h4>Top Suggestions</h4>
+				<div class="side-to-side">
+					<div class="component">
+						<a href="#song1"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song1">Song 1</label>
+					</div>
+					<div class="component">
+						<a href="#song2"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song2">Song 2</label>
+					</div>
+					<div class="component">
+						<a href="#song3"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song3">Song 3</label>
+					</div>
+					<div class="component">
+						<a href="#song4"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song4">Song 4</label>
+					</div>
+					<div class="component">
+						<a href="#song5"><img src="sound_file.png" alt="audio file image" height = 200 width = 200></a><br>
+						<label for="song5">Song 5</label>
+					</div>
+				</div>
+			</div>
+			<!-- Write everything here -->
+		</div>
+		<br><br><br><br>
+		<div id="footer">
+			<div class="container-audio">
+				<audio controls autoplay>
+					<source src="eot.mp3" type="audio/mpeg">
+					Your browser dose not Support the audio Tag
+				</audio>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function() {
+				$("li a").click(function() {
+					$("li a").removeClass('current');
+					$(this).addClass('current');
+				});
+			});
+			function showDropdown() {
+				document.getElementById("myDropdown").classList.toggle("show");
+			}
+			window.onclick = function(event) {
+				if (!event.target.matches('#menubutton')) {
+					var dropdowns = document.getElementsByClassName("dropdown-content");
+					var i;
+					for (i = 0; i < dropdowns.length; i++) {
+						var openDropdown = dropdowns[i];
+						if (openDropdown.classList.contains('show')) {
+							openDropdown.classList.remove('show');
+						}
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
