@@ -1,6 +1,6 @@
 name: Bulk Merge Dependabot
 on:
-  workflow_dispatch: # Allows you to run this manually with a button
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -10,11 +10,18 @@ jobs:
   merge-backlog:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # <--- This was the missing piece
+
       - name: Merge all Dependabot PRs
         run: |
-          # Fetch all open PRs from dependabot
           PR_LIST=$(gh pr list --author "app/dependabot" --json number --jq '.[].number')
           
+          if [ -z "$PR_LIST" ]; then
+            echo "No Dependabot PRs found."
+            exit 0
+          fi
+
           for pr in $PR_LIST; do
             echo "Processing PR #$pr"
             gh pr merge "$pr" --auto --merge || echo "Could not merge #$pr"
