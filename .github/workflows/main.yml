@@ -11,21 +11,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4 # <--- This was the missing piece
+        uses: actions/checkout@v4
 
-      - name: Merge all Dependabot PRs
+      - name: Force Update and Merge
         run: |
-          PR_LIST=$(gh pr list --author "app/dependabot" --json number --jq '.[].number')
+          # Get all open Dependabot PRs, oldest first
+          PR_LIST=$(gh pr list --author "app/dependabot" --json number --jq '.[].number | reverse | .[]')
           
-          if [ -z "$PR_LIST" ]; then
-            echo "No Dependabot PRs found."
-            exit 0
-          fi
-
           for pr in $PR_LIST; do
-            echo "Merging PR #$pr..."
-            # Removed --auto and added --admin to bypass potential restrictions
-            gh pr merge "$pr" --merge --admin || echo "Could not merge #$pr"
+            echo "Processing PR #$pr..."
+            
+            # 1. Tell Dependabot to rebase/comment to fix conflicts
+            gh pr comment "$pr" --body "@dependabot rebase"
+            
+            # Give GitHub a few seconds to process the rebase start
+            sleep 5
+            
+            # 2. Try to merge with administrative bypass
+            if gh pr merge "$pr" --merge --admin; then
+              echo "Successfully merged #$pr"
+              # Wait for GitHub to finish the internal git operations before next PR
+              sleep 10
+            else
+              echo "Still could not merge #$pr - it likely needs more time to rebase."
+            fi
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
