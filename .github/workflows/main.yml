@@ -1,0 +1,23 @@
+name: Bulk Merge Dependabot
+on:
+  workflow_dispatch: # Allows you to run this manually with a button
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge-backlog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge all Dependabot PRs
+        run: |
+          # Fetch all open PRs from dependabot
+          PR_LIST=$(gh pr list --author "app/dependabot" --json number --jq '.[].number')
+          
+          for pr in $PR_LIST; do
+            echo "Processing PR #$pr"
+            gh pr merge "$pr" --auto --merge || echo "Could not merge #$pr"
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
